@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "task-tracker"
+version = "0.1.0"
+description = "Асинхронный трекер задач на FastAPI"
+authors = ["Ваше Имя <you@example.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+aiosqlite = "^0.21.0"
+pydantic = "^2.11.4"
+sqlalchemy = "^2.0.41"
+uvicorn = "^0.34.2"
+fastapi = "^0.115.12"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.23.2"
+httpx = "^0.26.0"
