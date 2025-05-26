@@ -1,14 +1,15 @@
 from fastapi import Depends
-from sqlalchemy.orm import Session
-from .database import SessionLocal
-from .repositories import TaskRepository
+from sqlalchemy.ext.asyncio import AsyncSession
+from .database import AsyncSessionLocal
+from .services import TaskService
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
-def get_task_repository(db: Session = Depends(get_db)) -> TaskRepository:
-    return TaskRepository(db)
+async def get_async_session() -> AsyncSession:
+    async with AsyncSessionLocal() as session:
+        yield session
+
+
+async def get_task_service(
+    session: AsyncSession = Depends(get_async_session),
+) -> TaskService:
+    return TaskService(session)
